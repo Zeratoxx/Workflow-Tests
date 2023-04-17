@@ -8,22 +8,12 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  hello-world:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Run a one-line script
         run: echo Hello, world!
         
----
-
-name: dispatched
-
-on: 
-  workflow_dispatch:
-  
-jobs:
   call-hello:
     uses: ./.github/workflows/callable-hello-world.yml
     with:
