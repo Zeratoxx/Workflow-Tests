@@ -1,3 +1,5 @@
+name: call-hello
+
 on:
   workflow_call:
     inputs:
