@@ -1,0 +1,15 @@
+on:
+  workflow_call:
+    inputs:
+      name: 
+        description: "Who should be welcomed?"
+        required: true
+        type: string
+        
+jobs:
+  print-hello:
+    name: Generate output
+    runs-on: ubuntu-latest
+    
+    steps:
+      - run: echo "Hello ${{ inputs.name }}!"
