@@ -39,7 +39,8 @@ jobs:
           version-fragment: ${{ github.event.inputs.version_fragment }}
           
       - name: "New Version: ${{ steps.bump_version.outputs.next-version }}"
-      
+        run: ":"
+        
       - name: Push tag
         id: push_tag
         uses: mathieudutour/github-tag-action@v6.1
