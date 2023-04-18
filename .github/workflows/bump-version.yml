@@ -14,14 +14,9 @@ on:
         options: ['major', 'feature', 'bug', 'alpha', 'beta', 'pre', 'rc']
         type: choice
 
-jobs:
-  print-github-ref-name:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: "github-ref_name: '${{ github.ref_name }}'"
-        run: echo 'github-ref_name = ${{ github.ref_name }}'
-        
+jobs:        
   bump-version:
+    # Only on default branch
     if: github.ref_name == github.event.repository.default_branch
     runs-on: ubuntu-22.04
     permissions:
