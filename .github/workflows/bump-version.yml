@@ -7,11 +7,11 @@ on:
         description: 'Enter the commit SHA'
         type: string
         required: false
-      bump_type: 
+      version_fragment: 
         description: 'Choose the bump type'
         required: true
-        default: 'patch'
-        options: ['patch', 'minor', 'major']
+        default: 'bug'
+        options: ['major', 'feature', 'bug', 'alpha', 'beta', 'pre', 'rc']
         type: choice
 
 jobs:
@@ -36,7 +36,7 @@ jobs:
         uses: christian-draeger/increment-semantic-version@1.1.0
         with:
           current-version: ${{ steps.previous_tag.outputs.tag }}
-          version-fragment: ${{ github.event.inputs.bump_type }}
+          version-fragment: ${{ github.event.inputs.version_fragment }}
           
       - name: Do something with your bumped release version
         run: echo ${{ steps.bump_version.outputs.next-version }}
