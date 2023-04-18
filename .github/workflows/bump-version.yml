@@ -6,7 +6,6 @@ on:
       commit_sha: 
         description: 'Enter the commit SHA'
         type: string
-        default: ${{ github.sha }}
         required: false
       version_fragment: 
         description: 'Choose the bump type'
@@ -47,7 +46,7 @@ jobs:
         uses: mathieudutour/github-tag-action@v6.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          commit_sha: ${{ github.event.inputs.commit_sha }}
+        # commit_sha: ${{ github.event.inputs.commit_sha }}
           custom_tag: ${{ steps.bump_version.outputs.next-version }}
 
     # - name: Bump version and set tag at current commit
