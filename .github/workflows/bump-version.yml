@@ -3,7 +3,7 @@ name: Bump Version
 on:
   workflow_dispatch:
     inputs:
-      commit: 
+      commit_sha: 
         description: 'Enter the commit SHA'
         type: string
         required: false
@@ -38,9 +38,16 @@ jobs:
           current-version: ${{ steps.previous_tag.outputs.tag }}
           version-fragment: ${{ github.event.inputs.version_fragment }}
           
-      - name: Do something with your bumped release version
-        run: echo ${{ steps.bump_version.outputs.next-version }}
+      - name: "New Version: ${{ steps.bump_version.outputs.next-version }}"
       
+      - name: Push tag
+        id: push_tag
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          commit_sha: ${{ github.event.inputs.commit_sha }}
+          custom_tag: "v${{ steps.bump_version.outputs.next-version }}"
+
     # - name: Bump version and set tag at current commit
     #   uses: anothrNick/github-tag-action@v1.61.0
     #   with:
