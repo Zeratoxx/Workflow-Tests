@@ -2,10 +2,22 @@ name: Bump Version
 
 on:
   workflow_dispatch:
+    inputs:
+      commit: 
+        description: 'Enter the commit SHA'
+        type: string
+        required: true
+      bump_type: 
+        description: 'Choose the bump type'
+        required: true
+        default: 'PATCH'
+        options: ['PATCH', 'MINOR', 'MAJOR']
+        type: choice
 
 jobs:
   bump-version:
-    runs-on: ubuntu-latest
+    if: ${{ github.ref_name }} == ${{ github.event.repository.default_branch }}
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -16,5 +28,5 @@ jobs:
           tag_name: ${{ env.VERSION }}
           tag_message: ${{ env.VERSION }}
           release_branches: main
-          major_minor_or_patch: ${{ env.BUMP_TYPE }}
+          major_minor_or_patch: ${{ github.event.inputs.bump_type }}
           commit_sha: ${{ env.COMMIT_SHA }}
