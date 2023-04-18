@@ -49,13 +49,13 @@ jobs:
           
       - run: echo "Version bump from '${{ steps.previous_tag.outputs.tag }}' to '${{ steps.bump_version.outputs.next-version }}'"
         
-      - name: Push tag
-        id: push_tag
-        uses: mathieudutour/github-tag-action@v6.1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-        # commit_sha: ${{ github.event.inputs.commit_sha }}
-          custom_tag: ${{ steps.bump_version.outputs.next-version }}
+    #  - name: Push tag
+    #    id: push_tag
+    #    uses: mathieudutour/github-tag-action@v6.1
+    #    with:
+    #      github_token: ${{ secrets.GITHUB_TOKEN }}
+    #    # commit_sha: ${{ github.event.inputs.commit_sha }}
+    #      custom_tag: ${{ steps.bump_version.outputs.next-version }}
 
     # - name: Bump version and set tag at current commit
     #   uses: anothrNick/github-tag-action@v1.61.0
